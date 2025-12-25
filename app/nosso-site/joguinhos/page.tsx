@@ -54,6 +54,10 @@ export default function GameHubPage() {
         id: "flappy", title: "Flappy Cupid", desc: "Voe pelo caminho", 
         icon: Bird, color: "bg-[#ffdac1]", tapeColor: "bg-orange-400/30" 
     },
+      { 
+        id: "flappy", title: "Flappy Cupid", desc: "Voe pelo caminho", 
+        icon: Bird, color: "bg-[#ffdac1]", tapeColor: "bg-orange-400/30" 
+    },
   ];
 
   const renderGameComponent = () => {
