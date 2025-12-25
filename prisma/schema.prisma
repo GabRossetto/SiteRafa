@@ -1,0 +1,49 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Para guardar mensagens fofas do "Mural"
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  sender    String   // "Você" ou "Rafaela"
+  createdAt DateTime @default(now())
+  stickers  String?  // Emoji ou sticker associado (opcional)
+}
+
+// Galeria principal (Fotos e Vídeos curtos)
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  type      String
+  caption   String?  // <--- ESSA LINHA É OBRIGATÓRIA PARA CRIAR ABAS
+  createdAt DateTime @default(now())
+  width     Int?
+  height    Int?
+}
+
+// Cartas digitais
+model Letter {
+  id        String    @id @default(cuid())
+  title     String
+  content   String    @db.Text // Permite textos longos
+  sender    String
+  openDate  DateTime? // Se tiver data, só abre nesse dia!
+  isRead    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+}
+
+// Joguinhos e configs globais
+model GameScore {
+  id        String   @id @default(cuid())
+  gameName  String   // Ex: "Quiz" ou "ClickMatch"
+  score     Int
+  playedAt  DateTime @default(now())
+}
