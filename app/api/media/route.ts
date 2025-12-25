@@ -7,10 +7,16 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
     });
     return NextResponse.json(mediaList);
-  } catch (error) {
-    return NextResponse.json({ error: "Erro ao buscar" }, { status: 500 });
+  } catch (error: any) {
+    // --- AQUI ESTÁ A MUDANÇA PARA REVELAR O ERRO ---
+    return NextResponse.json({ 
+        error: "ERRO REVELADO", 
+        mensagem: error.message,
+        codigo: error.code
+    }, { status: 500 });
   }
 }
+
 
 export async function POST(request: Request) {
   try {
